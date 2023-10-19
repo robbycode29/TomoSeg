@@ -8,11 +8,18 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import HeaderBar from '@/components/HeaderBar.vue';
+import { mapActions } from 'vuex';
 
 export default defineComponent({
   name: 'App',
   components: {
     HeaderBar,
+  },
+  methods: {
+    ...mapActions(['setUser']),
+  },
+  created() {
+    this.setUser(JSON.parse(localStorage.getItem('user') || '{}'));
   },
 });
 </script>

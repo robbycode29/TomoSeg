@@ -9,7 +9,7 @@ const routes: Array<RouteRecordRaw> = [
     component: HomeView,
     beforeEnter: (to, from, next) => {
       const user = $store.getters.getUser
-      if (user) {
+      if (Object.keys(user).length) {
         next()
       } else {
         next('/auth')
@@ -35,7 +35,7 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import(/* webpackChunkName: "profile" */ '../views/ProfileView.vue'),
     beforeEnter: (to, from, next) => {
       const user = $store.getters.getUser
-      if (user) {
+      if (Object.keys(user).length) {
         next()
       } else {
         next('/auth')

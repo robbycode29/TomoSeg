@@ -43,6 +43,7 @@ export default defineComponent({
                         // or whether we leave that to developer to handle.
                         authResult.user.getIdToken().then((accessToken: any) => {
                             localStorage.setItem('accessToken', accessToken);
+                            localStorage.setItem('user', JSON.stringify(authResult.user));
                             this.setUser(authResult.user);
                             this.$router.push('/');
                         });
@@ -51,11 +52,18 @@ export default defineComponent({
                 },
                 signInFlow: 'popup',
                 signInOptions: [
-                    firebase.auth.EmailAuthProvider.PROVIDER_ID,
-                    firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-                    firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+                    {
+                        provider: firebase.auth.EmailAuthProvider.PROVIDER_ID,
+                        signInMethod: firebase.auth.EmailAuthProvider.EMAIL_LINK_SIGN_IN_METHOD,
+                    },
+                    {
+                        provider: firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+                    },
+                    {
+                        provider: firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+                    },
                 ],
-                // signInSuccessUrl: '/',
+                signInSuccessUrl: '/',
             });
         },
     },

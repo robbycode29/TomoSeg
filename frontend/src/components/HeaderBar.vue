@@ -10,7 +10,8 @@
                 <router-link to="/" class="text-slate-900 text-xl font-medium mr-4">Home</router-link>
                 <router-link to="/about" class="text-slate-900 text-xl font-medium mr-4">About</router-link>
                 <div @click="openProfile" class="cursor-pointer flex gap-2 items-center">
-                    <img src="@/assets/profile.png" class="w-6 h-6" />
+                    <img v-if="getUser?.photoURL" :src="userIcon" class="w-6 h-6 rounded-full" />
+                    <img v-else src="@/assets/profile.png" class="w-6 h-6" />
                     <span class="text-slate-900 text-lg font-medium">{{ userName }}</span>
                 </div>
             </div>
@@ -31,10 +32,14 @@ export default defineComponent({
         ...mapGetters(['getUser']),
         userName() {
             const user = this.getUser;
-            if (!user?.multiFactor.user.displayName) {
+            if (!user?.displayName) {
                 return 'Sign in';
             }
-            return user.multiFactor.user.displayName;
+            return user.displayName;
+        },
+        userIcon() {
+            const user = this.getUser;
+            return user.photoURL;
         },
     },
     methods: {

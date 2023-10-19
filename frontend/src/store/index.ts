@@ -1,6 +1,4 @@
 import { createStore } from 'vuex'
-import firebase from 'firebase/compat/app';
-import * as firebaseui from 'firebaseui'
 
 export default createStore({
   state: {
@@ -16,6 +14,7 @@ export default createStore({
   },
   actions: {
     setUser({ commit }, user) {
+      console.log(user)
       commit('setUser', user)
     },
   },
