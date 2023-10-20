@@ -31,12 +31,12 @@ export default defineComponent({
         ...mapGetters(['getUser']),
         userName() {
             const user = this.getUser;
-            if (!user?.displayName) {
-                if (Object.keys(user).length === 0) {
-                    return 'Sign in';
-                }
-                return 'Profile';
-            }
+            // if (!user?.displayName) {
+            //     if (Object.keys(user).length === 0) {
+            //         return 'Sign in';
+            //     }
+            //     return 'Profile';
+            // }
             return user.displayName;
         },
         userIcon() {
