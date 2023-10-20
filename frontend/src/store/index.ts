@@ -1,12 +1,17 @@
 import { createStore } from 'vuex'
+import { RootState } from '@/types'
+import { GetterTree } from 'vuex'
 
 export default createStore({
   state: {
-    user: null,
+    user: {
+      displayName: null,
+      photoURL: null,
+    },
   },
   getters: {
-    getUser: (state) => state.user,
-  },
+    getUser: (state: { user: object }) => state.user,
+  }  as GetterTree<RootState, RootState>,
   mutations: {
     setUser(state, user) {
       state.user = user

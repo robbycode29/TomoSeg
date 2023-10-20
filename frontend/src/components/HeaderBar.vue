@@ -19,7 +19,6 @@
     </div>
 </template>
 <script lang="ts">
-import router from '@/router';
 import { defineComponent } from 'vue';
 import { mapGetters } from 'vuex';
 
@@ -33,7 +32,10 @@ export default defineComponent({
         userName() {
             const user = this.getUser;
             if (!user?.displayName) {
-                return 'Sign in';
+                if (Object.keys(user).length === 0) {
+                    return 'Sign in';
+                }
+                return 'Profile';
             }
             return user.displayName;
         },
