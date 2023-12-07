@@ -13,7 +13,7 @@
                     <button>
                         <img src="@/assets/eye.svg" class="w-6"/>
                     </button>
-                    <button>
+                    <button v-if="getUser.is_admin">
                         <img src="@/assets/delete.svg" class="w-6"/>
                     </button>
                 </div>
@@ -22,6 +22,8 @@
     </div>
 </template>
 <script lang="ts">
+import { mapGetters } from 'vuex';
+
 export default {
     name: 'ScansMenu',
     data() {
@@ -53,6 +55,9 @@ export default {
                 },
             ],
         };
+    },
+    computed: {
+        ...mapGetters(['getUser']),
     },
 };
 </script>

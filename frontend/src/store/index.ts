@@ -32,11 +32,13 @@ export default createStore({
     async addUser({ commit }, user) {
       try {
         const userFile = doc(firebaseConfig.db, "users", user.uid);
+        const oldUser = await getDoc(userFile);
         await setDoc(userFile, {
           id: user.uid,
           name: user.displayName ? user.displayName : user.email,
           email: user.email,
           photoUrl: user.photoURL ? user.photoURL : null,
+          is_admin: oldUser.data().is_admin ? oldUser.data().is_admin : false,
         }, { merge: true });
         const updatedUser = await getDoc(userFile);
         commit("setUser", {
@@ -44,6 +46,7 @@ export default createStore({
           photoURL: updatedUser.data().photoUrl,
           email: updatedUser.data().email,
           uid: updatedUser.data().id,
+          is_admin: updatedUser.data().is_admin,
         });
       } catch (e) {
         console.error("Error adding document: ", e);
