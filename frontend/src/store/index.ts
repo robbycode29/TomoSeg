@@ -3,8 +3,9 @@ import { RootState } from '@/types'
 import { GetterTree } from 'vuex'
 import { collection, setDoc, doc, getDoc } from "firebase/firestore";
 import firebaseConfig from '@/firebaseConfig'
+import scans from './scans'
 
-export default createStore({
+export default createStore<RootState>({
   state: {
     user: {
       displayName: null,
@@ -54,6 +55,6 @@ export default createStore({
     },
   },
   modules: {
-    
+    scans,
   }
 })

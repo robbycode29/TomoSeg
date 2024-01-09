@@ -18,6 +18,8 @@
     </div>
 </template>
 <script lang="ts">
+import { mapActions } from 'vuex';
+
 export default {
     name: 'UploadsMenu',
     data() {
@@ -26,6 +28,7 @@ export default {
         };
     },
     methods: {
+        ...mapActions('scans', ['uploadScan']),
         onDragOver(e: DragEvent) {
             e.preventDefault();
             this.dragging = true;
@@ -37,8 +40,8 @@ export default {
         },
         onFileChange(e) {
             const files = e.target.files;
-            console.log(files);
-            // Handle the files here
+            if (!files) return;
+            this.uploadScan(files[0]);
         },
         onButtonClick() {
             this.$refs.fileInput.click();
